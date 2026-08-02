@@ -1,0 +1,128 @@
+{
+  "meta": {
+    "name": "球探体育爬虫配置",
+    "version": "1.0",
+    "description": "收录 zq.titan007.com / vip.titan007.com 爬虫涉及的 URL 模板、API 接口、ID 映射、反爬策略等"
+  },
+  "domains": {
+    "main": "https://zq.titan007.com",
+    "vip": "https://vip.titan007.com",
+    "euro_odds": "http://1x2.titan007.com"
+  },
+  "js_data": {
+    "description": "赛程数据 JS 文件，需带 Referer + 随机 version 参数",
+    "match_result": {
+      "league":         "/jsData/matchResult/{season}/s{id}.js",
+      "league_subid":   "/jsData/matchResult/{season}/s{id}_{subId}.js",
+      "cup":            "/jsData/matchResult/{season}/c{id}.js"
+    },
+    "season_list":      "/jsData/LeagueSeason/sea{id}.js"
+  },
+  "pages": {
+    "description": "HTML 页面（zq 主站）",
+    "league":      "/cn/League/{season}/{id}.html",
+    "sub_league":  "/cn/SubLeague/{season}/{id}.html",
+    "cup_match":   "/cn/CupMatch/{id}.html",
+    "analysis":    "/analysis/{scheduleID}cn.htm",
+    "note": "分析页 HTML 内嵌百家欧指表格，每行 onclick=\"OddsHistory('...')\" 包含欧赔历史 URL，从中可提取 id 参数供 1x2.titan007.com/OddsHistory.aspx 调用"
+  },
+  "odds_api": {
+    "description": "赔率接口",
+    "asian_handicap": {
+      "description": "亚洲盘口，vip 子站，需带 Referer: https://vip.titan007.com/",
+      "base": "https://vip.titan007.com/changeDetail",
+      "path": "/handicap.aspx",
+      "params": { "id": "scheduleID", "companyID": 1, "l": 0 },
+      "note": "id=scheduleID；companyID 见 companies.asian；l=0(全场)/1(半场)"
+    },
+    "over_under": {
+      "description": "大小球盘口，vip 子站，公司列表同亚盘",
+      "base": "https://vip.titan007.com/changeDetail",
+      "path": "/bigSmallDetail.aspx",
+      "params": { "id": "scheduleID", "companyID": 1, "l": 0 },
+      "note": "参数说明同亚盘"
+    },
+    "european": {
+      "description": "欧赔历史变化，1x2 子站，需带 Referer: http://1x2.titan007.com/",
+      "base": "http://1x2.titan007.com",
+      "path": "/OddsHistory.aspx",
+      "params": { "id": "?", "sid": "scheduleID", "cid": "companyID", "l": 0 },
+      "note": "id 参数来源：从分析页 HTML 的百家欧指表 onclick 属性中提取 OddsHistory URL，不可从别处推算；sid=scheduleID；cid 见 companies.european；l=0(全场)/1(半场)"
+    }
+  },
+  "data_api": {
+    "description": "JSON 数据接口（zq 主站）",
+    "endpoints": {
+      "schedule_info": {
+        "url": "/default/getScheduleInfo",
+        "params": { "sid": "scheduleID" },
+        "note": "获取指定比赛的赛程信息"
+      }
+    }
+  },
+  "js_vars": {
+    "description": "分析页面中的 JS 变量",
+    "match_info": ["hometeam", "guestteam", "strTime", "scheduleID"],
+    "recent_matches": {
+      "h_data":  "主队近期战绩",
+      "a_data":  "客队近期战绩",
+      "h2_data": "主队主场战绩",
+      "a2_data": "客队客场战绩",
+      "v_data":  "历史交锋"
+    },
+    "competition_info": {
+      "arrTeam":       "球队映射表 {id: {cn, en}}",
+      "arrSubLeague":  "子联赛信息列表",
+      "arrCupKind":    "杯赛轮次名称映射",
+      "arrLeague":     "联赛基本信息 [id, name_cn, name_tw, name_en, season]",
+      "arrCup":        "杯赛基本信息 [id, name_cn, name_tw, name_en, season]",
+      "arrSeason":     "可用赛季列表"
+    }
+  },
+  "companies": {
+    "description": "赔率公司 ID 映射",
+    "asian": {
+      "description": "亚盘 / 大小球共用公司 ID",
+      "1": { "name_cn": "澳门", "name_en": "Macau" },
+      "8": { "name_cn": "365", "name_en": "Bet365" },
+      "12": { "name_cn": "易胜博", "name_en": "eBet" },
+      "17": { "name_cn": "明升", "name_en": "MingSheng" }
+    },
+    "european": {
+      "description": "欧赔独立公司 ID",
+      "115": { "name_cn": "威廉希尔", "name_en": "William Hill" },
+      "281": { "name_cn": "365", "name_en": "Bet365" },
+      "90": { "name_cn": "易胜博", "name_en": "eBet" },
+      "104": { "name_cn": "Interwetten", "name_en": "Interwetten" },
+      "2": { "name_cn": "betfair", "name_en": "Betfair" }
+    }
+  },
+  "anti_crawl": {
+    "referer": {
+      "zq":  "https://zq.titan007.com/",
+      "vip": "https://vip.titan007.com/"
+    },
+    "version_param": {
+      "template": "?version=202607{4位序号}",
+      "note": "所有 JS 数据文件请求需附加随机 version 参数"
+    },
+    "user_agents": [
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36",
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/119.0.0.0 Safari/537.36",
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0"
+    ],
+    "request_interval": [1, 3],
+    "note": "请求间隔 1~3 秒随机"
+  },
+  "version_markers": {
+    "description": "分析页面模板版本识别标志",
+    "V1":               { "header": "id='odds_top'",        "cols": 16, "note": "15/16赛季" },
+    "V1.5_transition":  { "header": "id='odds_top2'",      "cols": 18, "note": "16/17过渡" },
+    "V1.5":             { "header": "id='odds_top2'",      "cols": 20, "note": "17/18-18/19" },
+    "V1.5c":            { "header": "id='odds_top2'",      "cols": 20, "note": "19/20起有天气" },
+    "V2":               { "header": "class='header'",      "cols": 20, "note": "20/21-22/23" },
+    "V2.5":             { "header": "class='header'",      "cols": 20, "note": "23/24无VIP" },
+    "V3":               { "header": "analyhead new",        "cols": 20, "note": "24/25有VIP" },
+    "V3.1":             { "header": "analyhead new",        "cols": 22, "note": "25/26扩展" }
+  }
+}

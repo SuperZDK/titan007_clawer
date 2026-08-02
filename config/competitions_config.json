@@ -1,0 +1,1087 @@
+{
+  "meta": {
+    "base_url": "https://zq.titan007.com",
+    "description": "球探体育赛事配置数据 —— 涵盖16/17赛季至25/26赛季",
+    "version": "3.0",
+    "note_analysis_url": "/analysis/{scheduleID}cn.htm - scheduleID从赛程JS数据(jh['R_X'][0]或jh['GXXXXXA'][0])获取",
+    "note_crawler": "混合策略：requests获取JS赛程数据(s{id}.js/s{id}_{subId}.js/c{id}.js)，Playwright渲染Analysis页",
+    "version_timeline": {
+      "V1.5_transition": "2016-2017：18列h_data过渡版本, id='odds_top2'",
+      "V1.5": "2017-2018至2019-2020：20列h_data, id='odds_top2', V1.5c(19/20)起有天气",
+      "V2": "2020-2021至2022-2023：20列, class='header', 积分表用词'得分'+'积分', 有天气",
+      "V2.5": "2023-2024：20列, class='header', 积分表仅用'积分'(无'得分'), 无VIP",
+      "V3": "2024-2025：20列(某些联赛22列), class='header'+'analyhead new', 有VIP, 部分联赛无'上一场阵容'",
+      "V3.1": "2025-2026：22列(部分联赛), 'analyhead new', VIP, 新赛季进一步扩展"
+    }
+  },
+  "leagues": [
+    {
+      "id": 36,
+      "name_cn": "英超",
+      "name_en": "English Premier League",
+      "url_type": "League",
+      "url_pattern": "/cn/League/{season}/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "js_data_path": "/jsData/matchResult/{season}/s{id}.js",
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "has_playoffs": false,
+      "total_rounds": 38,
+      "teams": 20,
+      "note": "标准双循环联赛，共11个赛季可用",
+      "crawl": {
+        "enabled": true,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 37,
+      "name_cn": "英冠",
+      "name_en": "EFL Championship",
+      "url_type": "SubLeague",
+      "url_pattern": "/cn/SubLeague/{season}/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "js_data_path": "/jsData/matchResult/{season}/s{id}.js",
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "has_playoffs": true,
+      "playoffs_note": "升级附加赛（第3-6名争最后一个升级名额）",
+      "total_rounds": 46,
+      "teams": 24,
+      "note": "有升级附加赛",
+      "crawl": {
+        "enabled": true,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 39,
+      "name_cn": "英甲",
+      "name_en": "EFL League One",
+      "url_type": "SubLeague",
+      "url_pattern": "/cn/SubLeague/{season}/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "js_data_path": "/jsData/matchResult/{season}/s{id}.js",
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "has_playoffs": true,
+      "playoffs_note": "升级附加赛（第3-6名）",
+      "total_rounds": 46,
+      "teams": 24,
+      "note": "有升级附加赛",
+      "crawl": {
+        "enabled": false,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 8,
+      "name_cn": "德甲",
+      "name_en": "Bundesliga",
+      "url_type": "League",
+      "url_pattern": "/cn/League/{season}/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "js_data_path": "/jsData/matchResult/{season}/s{id}.js",
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "has_playoffs": true,
+      "playoffs_note": "倒数第3名与德乙第3名进行升降级附加赛",
+      "total_rounds": 34,
+      "teams": 18,
+      "note": "有升降级附加赛",
+      "crawl": {
+        "enabled": true,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 9,
+      "name_cn": "德乙",
+      "name_en": "2. Bundesliga",
+      "url_type": "SubLeague",
+      "url_pattern": "/cn/SubLeague/{season}/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "js_data_path": "/jsData/matchResult/{season}/s{id}.js",
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "has_playoffs": true,
+      "playoffs_note": "第3名与德甲倒数第3名进行升降级附加赛；第16-18名降级",
+      "total_rounds": 34,
+      "teams": 18,
+      "note": "有升/降级附加赛",
+      "crawl": {
+        "enabled": false,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 11,
+      "name_cn": "法甲",
+      "name_en": "Ligue 1",
+      "url_type": "League",
+      "url_pattern": "/cn/League/{season}/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "js_data_path": "/jsData/matchResult/{season}/s{id}.js",
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "has_playoffs": false,
+      "total_rounds": 34,
+      "teams": 18,
+      "note": "2023-2024赛季起从20队缩减为18队，38轮变34轮",
+      "crawl": {
+        "enabled": true,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 12,
+      "name_cn": "法乙",
+      "name_en": "Ligue 2",
+      "url_type": "SubLeague",
+      "url_pattern": "/cn/SubLeague/{season}/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "js_data_path": "/jsData/matchResult/{season}/s{id}.js",
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "has_playoffs": true,
+      "playoffs_note": "升级附加赛（第3-5名与法甲第16名）",
+      "total_rounds": 34,
+      "teams": 18,
+      "note": "2024-2025赛季起缩减为18队",
+      "crawl": {
+        "enabled": false,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 34,
+      "name_cn": "意甲",
+      "name_en": "Serie A",
+      "url_type": "SubLeague",
+      "url_pattern": "/cn/SubLeague/{season}/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "js_data_path": "/jsData/matchResult/{season}/s{id}.js",
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "has_playoffs": false,
+      "total_rounds": 38,
+      "teams": 20,
+      "note": "标准双循环",
+      "crawl": {
+        "enabled": true,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 31,
+      "name_cn": "西甲",
+      "name_en": "La Liga",
+      "url_type": "League",
+      "url_pattern": "/cn/League/{season}/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "js_data_path": "/jsData/matchResult/{season}/s{id}.js",
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "has_playoffs": false,
+      "total_rounds": 38,
+      "teams": 20,
+      "note": "标准双循环",
+      "crawl": {
+        "enabled": true,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 23,
+      "name_cn": "葡超",
+      "name_en": "Primeira Liga",
+      "url_type": "SubLeague",
+      "url_pattern": "/cn/SubLeague/{season}/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "js_data_path": "/jsData/matchResult/{season}/s{id}.js",
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "has_playoffs": false,
+      "total_rounds": 34,
+      "teams": 18,
+      "note": "标准双循环",
+      "crawl": {
+        "enabled": true,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 16,
+      "name_cn": "荷甲",
+      "name_en": "Eredivisie",
+      "url_type": "SubLeague",
+      "url_pattern": "/cn/SubLeague/{season}/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "js_data_path": "/jsData/matchResult/{season}/s{id}.js",
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "has_playoffs": true,
+      "playoffs_note": "欧战附加赛（第5-8名）和降级附加赛",
+      "total_rounds": 34,
+      "teams": 18,
+      "note": "有欧战/降级附加赛",
+      "crawl": {
+        "enabled": true,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 17,
+      "name_cn": "荷乙",
+      "name_en": "Eerste Divisie",
+      "url_type": "SubLeague",
+      "url_pattern": "/cn/SubLeague/{season}/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "js_data_path": "/jsData/matchResult/{season}/s{id}.js",
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "has_playoffs": true,
+      "playoffs_note": "升级附加赛（第2-9名，分阶段冠军）",
+      "total_rounds": 38,
+      "teams": 20,
+      "note": "荷乙无降级，有升级附加赛",
+      "crawl": {
+        "enabled": false,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 26,
+      "name_cn": "瑞典超",
+      "name_en": "Allsvenskan",
+      "url_type": "SubLeague",
+      "url_pattern": "/cn/SubLeague/{season}/{id}.html",
+      "season_format": "single_year",
+      "available_seasons": [
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "js_data_path": "/jsData/matchResult/{season}/s{id}.js",
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "has_playoffs": false,
+      "total_rounds": 30,
+      "teams": 16,
+      "note": "春季-秋季单年赛季，无附加赛",
+      "crawl": {
+        "enabled": false,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 13,
+      "name_cn": "芬超",
+      "name_en": "Veikkausliiga",
+      "url_type": "SubLeague",
+      "url_pattern": "/cn/SubLeague/{season}/{id}.html",
+      "season_format": "single_year",
+      "available_seasons": [
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "js_data_path": "/jsData/matchResult/{season}/s{id}.js",
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "has_playoffs": true,
+      "playoffs_note": "冠军组/降级组附加赛（前6名+后6名，常规赛22轮+5轮附加赛共27轮）",
+      "total_rounds": 27,
+      "teams": 12,
+      "note": "春季-秋季单年赛季，有冠军组/降级组附加赛；历史赛制有变化（曾为33轮三循环）",
+      "crawl": {
+        "enabled": false,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 22,
+      "name_cn": "挪超",
+      "name_en": "Eliteserien",
+      "url_type": "SubLeague",
+      "url_pattern": "/cn/SubLeague/{season}/{id}.html",
+      "season_format": "single_year",
+      "available_seasons": [
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "js_data_path": "/jsData/matchResult/{season}/s{id}.js",
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "has_playoffs": false,
+      "total_rounds": 30,
+      "teams": 16,
+      "note": "春季-秋季单年赛季，无附加赛",
+      "crawl": {
+        "enabled": false,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 25,
+      "name_cn": "日职联",
+      "name_en": "J1 League",
+      "url_type": "SubLeague",
+      "url_pattern": "/cn/SubLeague/{season}/{id}.html",
+      "season_format": "mixed",
+      "available_seasons": [
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "latest_cross_year_season": "2026-2027",
+      "js_data_path": "/jsData/matchResult/{season}/s{id}.js",
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "has_playoffs": false,
+      "total_rounds": 38,
+      "teams": 20,
+      "note": "历史赛季为单年格式，2026-2027赛季起转为跨年格式",
+      "crawl": {
+        "enabled": true,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 284,
+      "name_cn": "日职乙",
+      "name_en": "J2 League",
+      "url_type": "SubLeague",
+      "url_pattern": "/cn/SubLeague/{season}/{id}.html",
+      "season_format": "mixed",
+      "available_seasons": [
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "latest_cross_year_season": "2026-2027",
+      "js_data_path": "/jsData/matchResult/{season}/s{id}.js",
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "has_playoffs": true,
+      "playoffs_note": "升级附加赛（第3-6名）",
+      "total_rounds": 38,
+      "teams": 20,
+      "note": "有升级附加赛；历史为单年格式，最新转跨年",
+      "crawl": {
+        "enabled": true,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 21,
+      "name_cn": "美职联",
+      "name_en": "Major League Soccer",
+      "url_type": "League",
+      "url_pattern": "/cn/League/{season}/{id}.html",
+      "season_format": "single_year",
+      "available_seasons": [
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "js_data_path": "/jsData/matchResult/{season}/s{id}.js",
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "has_playoffs": true,
+      "playoffs_note": "MLS Cup季后赛",
+      "total_rounds": 34,
+      "teams": 29,
+      "note": "单年赛季，球队数逐年增加（从20到29队）",
+      "crawl": {
+        "enabled": false,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 273,
+      "name_cn": "澳超",
+      "name_en": "A-League",
+      "url_type": "League",
+      "url_pattern": "/cn/League/{season}/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "js_data_path": "/jsData/matchResult/{season}/s{id}.js",
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "has_playoffs": true,
+      "playoffs_note": "季后赛（前6名，总决赛系列赛）",
+      "total_rounds": 26,
+      "teams": 13,
+      "note": "有季后赛",
+      "crawl": {
+        "enabled": true,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 29,
+      "name_cn": "苏超",
+      "name_en": "Scottish Premiership",
+      "url_type": "SubLeague",
+      "url_pattern": "/cn/SubLeague/{season}/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "js_data_path": "/jsData/matchResult/{season}/s{id}.js",
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "has_playoffs": false,
+      "playoffs_note": "虽无传统附加赛，但有争冠组/保级组（33轮后分两组各6队）",
+      "total_rounds": 38,
+      "teams": 12,
+      "note": "33轮常规赛+5轮分组赛（争冠组/保级组）",
+      "crawl": {
+        "enabled": false,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    }
+  ],
+  "cups": [
+    {
+      "id": 103,
+      "name_cn": "欧冠",
+      "name_en": "UEFA Champions League",
+      "url_type": "CupMatch",
+      "url_pattern": "/cn/CupMatch/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "js_data_path": "/jsData/matchResult/{season}/c{id}.js",
+      "has_group_stage": true,
+      "note": "包含小组赛+淘汰赛",
+      "crawl": {
+        "enabled": false,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 113,
+      "name_cn": "欧联",
+      "name_en": "UEFA Europa League",
+      "url_type": "CupMatch",
+      "url_pattern": "/cn/CupMatch/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "js_data_path": "/jsData/matchResult/{season}/c{id}.js",
+      "has_group_stage": true,
+      "note": "包含小组赛+淘汰赛",
+      "crawl": {
+        "enabled": false,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 2187,
+      "name_cn": "欧协联",
+      "name_en": "UEFA Europa Conference League",
+      "url_type": "CupMatch",
+      "url_pattern": "/cn/CupMatch/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "unavailable_seasons": [
+        "2015-2016",
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021"
+      ],
+      "unavailable_reason": "欧协联于2021-2022赛季起才开始举办",
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "js_data_path": "/jsData/matchResult/{season}/c{id}.js",
+      "has_group_stage": true,
+      "note": "2021年首届，仅5个赛季在15/16-25/26范围内",
+      "crawl": {
+        "enabled": false,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 90,
+      "name_cn": "英足总杯",
+      "name_en": "FA Cup",
+      "url_type": "CupMatch",
+      "url_pattern": "/cn/CupMatch/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "js_data_path": "/jsData/matchResult/{season}/c{id}.js",
+      "has_group_stage": false,
+      "note": "纯淘汰赛；sea90无2026-2027赛季数据（最新止于2025-2026）",
+      "crawl": {
+        "enabled": false,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 84,
+      "name_cn": "英联杯",
+      "name_en": "EFL Cup (Carabao Cup)",
+      "url_type": "CupMatch",
+      "url_pattern": "/cn/CupMatch/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "js_data_path": "/jsData/matchResult/{season}/c{id}.js",
+      "has_group_stage": false,
+      "note": "纯淘汰赛",
+      "crawl": {
+        "enabled": false,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 385,
+      "name_cn": "社区盾杯",
+      "name_en": "FA Community Shield",
+      "url_type": "CupMatch",
+      "url_pattern": "/cn/CupMatch/{id}.html",
+      "season_format": "single_year",
+      "available_seasons": [
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "js_data_path": "/jsData/matchResult/{season}/c{id}.js",
+      "has_group_stage": false,
+      "note": "单场决赛（赛季开幕前），单年格式",
+      "crawl": {
+        "enabled": false,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 54,
+      "name_cn": "法国杯",
+      "name_en": "Coupe de France",
+      "url_type": "CupMatch",
+      "url_pattern": "/cn/CupMatch/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "js_data_path": "/jsData/matchResult/{season}/c{id}.js",
+      "has_group_stage": false,
+      "note": "纯淘汰赛；sea54无2026-2027赛季数据",
+      "crawl": {
+        "enabled": false,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 51,
+      "name_cn": "德国杯",
+      "name_en": "DFB-Pokal",
+      "url_type": "CupMatch",
+      "url_pattern": "/cn/CupMatch/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "js_data_path": "/jsData/matchResult/{season}/c{id}.js",
+      "has_group_stage": false,
+      "note": "纯淘汰赛",
+      "crawl": {
+        "enabled": false,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 83,
+      "name_cn": "意大利杯",
+      "name_en": "Coppa Italia",
+      "url_type": "CupMatch",
+      "url_pattern": "/cn/CupMatch/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "js_data_path": "/jsData/matchResult/{season}/c{id}.js",
+      "has_group_stage": false,
+      "note": "纯淘汰赛",
+      "crawl": {
+        "enabled": false,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 81,
+      "name_cn": "西班牙国王杯",
+      "name_en": "Copa del Rey",
+      "url_type": "CupMatch",
+      "url_pattern": "/cn/CupMatch/{id}.html",
+      "season_format": "cross_year",
+      "available_seasons": [
+        "2016-2017",
+        "2017-2018",
+        "2018-2019",
+        "2019-2020",
+        "2020-2021",
+        "2021-2022",
+        "2022-2023",
+        "2023-2024",
+        "2024-2025",
+        "2025-2026"
+      ],
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "js_data_path": "/jsData/matchResult/{season}/c{id}.js",
+      "has_group_stage": false,
+      "note": "纯淘汰赛；sea81无2026-2027赛季数据",
+      "crawl": {
+        "enabled": false,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 704,
+      "name_cn": "西超杯",
+      "name_en": "Supercopa de Espana",
+      "url_type": "CupMatch",
+      "url_pattern": "/cn/CupMatch/{id}.html",
+      "season_format": "single_year",
+      "available_seasons": [
+        "2016",
+        "2017",
+        "2018",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "missing_seasons": [
+        "2019"
+      ],
+      "missing_reason": "sea704.js中缺少2019赛季条目（可能因改制或停办）",
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "js_data_path": "/jsData/matchResult/{season}/c{id}.js",
+      "has_group_stage": false,
+      "note": "2019-2020赛季改制为四强赛制；2019年份数据缺失",
+      "crawl": {
+        "enabled": false,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    },
+    {
+      "id": 72,
+      "name_cn": "日联杯",
+      "name_en": "J.League Cup",
+      "url_type": "CupMatch",
+      "url_pattern": "/cn/CupMatch/{id}.html",
+      "season_format": "single_year",
+      "available_seasons": [
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025",
+        "2026"
+      ],
+      "js_sea_path": "/jsData/LeagueSeason/sea{id}.js",
+      "js_data_path": "/jsData/matchResult/{season}/c{id}.js",
+      "has_group_stage": true,
+      "note": "包含小组赛+淘汰赛，单年格式",
+      "crawl": {
+        "enabled": false,
+        "tier": "P1",
+        "season_scope": "current"
+      }
+    }
+  ],
+  "url_patterns": {
+    "analysis_page": "/analysis/{scheduleID}cn.htm",
+    "league_page": {
+      "League": "/cn/League/{season}/{id}.html",
+      "SubLeague": "/cn/SubLeague/{season}/{id}.html"
+    },
+    "cup_listing_page": "/cn/CupMatch/{id}.html",
+    "js_data": {
+      "league": "/jsData/matchResult/{season}/s{id}.js",
+      "league_subid": "/jsData/matchResult/{season}/s{id}_{subId}.js",
+      "cup": "/jsData/matchResult/{season}/c{id}.js",
+      "season": "/jsData/LeagueSeason/sea{id}.js"
+    },
+    "note_js_data_paths": "联赛先用s{id}.js; 若返回404或无jh数据则从赛季页HTML发现subId后用s{id}_{subId}.js. 杯赛固定用c{id}.js. 所有JS请求需带Referer+version参数.",
+    "subId_discovery": "从赛季页(/cn/League/{season}/{id}.html或/cn/SubLeague/{season}/{id}.html)的<script>标签中提取s{id}_{subId}.js路径中的subId",
+    "analysis_data": "/default/getScheduleInfo?sid={scheduleID}",
+    "js_with_version_and_referer": true
+  },
+  "crawler_notes": {
+    "anti_crawl": [
+      "JS数据文件需要带 Referer 和随机 version 参数（如 ?version=2026072201）",
+      "analysis 页面反爬较重，建议用 Playwright 渲染后提取 JS 变量和 DOM",
+      "部分旧赛季 JS 数据文件可能 404（如苏超ID=29），需处理重试和降级策略",
+      "随机 User-Agent 和请求间隔 1-3 秒"
+    ],
+    "method": "混合策略：requests获取赛程数据 + Playwright渲染Analysis页",
+    "season_format_explanation": {
+      "cross_year": "YYYY-YYYY格式，如 2025-2026（适用于英超、德甲等欧洲联赛）",
+      "single_year": "YYYY格式，如 2026（适用于美职联、挪超、瑞典超、芬超等春季-秋季联赛）",
+      "mixed": "最新赛季为跨年，旧赛季为单年（日职联、日职乙从2026-2027起转跨年）"
+    },
+    "user_range_meaning": {
+      "15/16-25/26_for_cross_year": "从2015-2016到2025-2026共11个赛季",
+      "15/16-25/26_for_single_year": "从2015到2026共12个赛季（对应跨年范围的起止年份）",
+      "15/16-25/26_for_mixed": "单年格式列出（2015-2026），最新跨年赛季2026-2027已超出范围"
+    },
+    "analysis_page_versions": {
+      "V1_15_16": "id='odds_top'头模板, 16列h_data, 无天气区域, 有'上一场阵容'单表, 积分表用词'得分'",
+      "V1_5_transition_16_17": "id='odds_top2'过渡头, 18列h_data, 其余同V1",
+      "V1_5_17_20": "id='odds_top2', 20列h_data, 无天气(17-19)/有天气(19-20), 单表阵容",
+      "V2_20_23": "class='header'新版头, 20列h_data, 有天气, 嵌套表阵容+球员链接, 积分表'得分'+'积分'",
+      "V2_5_23_24": "class='header', 20列, 积分表仅用'积分'(无'得分'), 无VIP区",
+      "V3_24_25": "class='header'+'analyhead new', 20-22列h_data, 有VIP方案区, 部分无'上一场阵容'",
+      "V3_1_25_26": "同V3, 22列扩展(部分联赛), 整合评分等新元素"
+    },
+    "key_version_markers": {
+      "header_type": "最可靠: id='odds_top'→V1, id='odds_top2'→V1.5, class='header'→V2, 'analyhead new'→V3",
+      "standings_terminology": "V1-V2同时'得分'+'积分'; V2.5+仅'积分'",
+      "prev_lineup": "V1-V2有'上一场阵容'; V3部分联赛无",
+      "weather": "V1-V1.5a无天气; V1.5c(19/20)+有天气",
+      "vip": "V3有VIP方案区; V1-V2.5无"
+    },
+    "reliable_markers": [
+      "头模板类型(id='odds_top'/'odds_top2'/class='header'/analyhead new) → 最可靠的版本标识",
+      "h_data列数 → 辅助判定(16/18/20/22), 但同版本内可能有杂项差异",
+      "积分表用词('得分'/'积分') → V2.5分界点",
+      "VIP区 → V3标志"
+    ],
+    "analysis_page_sections": {
+      "match_info_js_vars": "hometeam, guestteam, strTime, scheduleID (JS变量, 所有版本通用)",
+      "match_info_weather": "天气/温度 (V1.5c+才有)",
+      "recent_matches_js": "JS变量 h_data(主队), a_data(客队), h2_data(主队主场), a2_data(客队客场), v_data(对赛) (所有版本通用, 列数因版本而异)",
+      "league_standings": "HTML表格(主客队联赛排名), 表头用词'得分'(V1-V2)/'积分'(V2.5+)",
+      "lineup": "HTML区域: V1单表无球员链接, V2嵌套表+球员链接, V3整合评分",
+      "head_to_head": "HTML表格 vsOld(历史交锋)+vsNew(近期交锋)",
+      "match_preview": "HTML文本区域(赛前简报), V1内联, V2动态加载, V3表格+动态"
+    }
+  }
+}

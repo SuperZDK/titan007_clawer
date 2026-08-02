@@ -1,0 +1,12 @@
+[Unit]
+Description=Titan007 live odds incremental tick (season sync, odds, analysis, sweep)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/titan007_pro/deploy/systemd/titan007-live.sh
+WorkingDirectory=/opt/titan007_pro
+Environment=PYTHONUNBUFFERED=1
+StandardOutput=journal
+StandardError=journal
